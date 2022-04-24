@@ -48,11 +48,35 @@ const viewAll = async () => {
 const viewDept = async () => {
     const query = 'SELECT * FROM department';
 
-    connection.query(query, function (err, res) {
+    db.query(query, function (err, res) {
         if (err) throw err;
         const deptArray = []
         res.forEach(department => deptArray.push(department))
         console.table(deptArray)
+        viewAll()
+    })
+}
+
+const viewRoles = async () => {
+    const query = 'SELECT * FROM role';
+
+    db.query(query, function (err, res) {
+        if (err) throw err;
+        const roleArray = []
+        res.forEach(role => roleArray.push(role))
+        console.table(roleArray)
+        viewAll()
+    })
+}
+
+const viewEmployees = async () => {
+    const query = 'SELECT * FROM employee';
+
+    db.query(query, function (err, res) {
+        if (err) throw err;
+        const employeeArray = []
+        res.forEach(employee => employeeArray.push(employee))
+        console.table(employeeArray)
         viewAll()
     })
 }
