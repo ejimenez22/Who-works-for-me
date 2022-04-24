@@ -162,4 +162,16 @@ const addEmployee = async () => {
     })
 }
 
+const updateEmployee = async () => {
+    inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'employeeList',
+            message: 'Which employees role do you wish to update?',
+            choices: []
+
+        }
+    ])
+}
+
 viewAll()
