@@ -163,12 +163,18 @@ const addEmployee = async () => {
 }
 
 const updateEmployee = async () => {
+    const employees = db.query('SELECT * FROM employee');
     inquirer.prompt ([
         {
             type: 'list',
             name: 'employeeList',
             message: 'Which employees role do you wish to update?',
-            choices: []
+            choices: employees.map(function {(employeeName) => {
+                return {
+                    name: employeeName.first_name + "" + employeeName.last_name
+                }
+            
+            }})
 
         }
     ])
