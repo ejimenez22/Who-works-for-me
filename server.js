@@ -81,4 +81,85 @@ const viewEmployees = async () => {
     })
 }
 
+// functions for adding to databases
+const addDept = async () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'dept',
+            message: 'What is the name of the department?'
+        }
+    ])
+    .then(function (answer) {
+        console.log(answer)
+        db.query('INSERT INTO department SET ?', {
+            name: answer.dept
+        }, function (err){
+            if (err) throw err;
+        })
+    })
+}
+
+const addRole = async () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newRole',
+            message: 'What is the name of the new role?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Whats is the salary for the role?'
+        },
+        {
+            type: 'input',
+            name: 'roleDept',
+            message: 'Which department does the role belong too?'
+        }
+    ])
+    .then(function (answers){
+        console.log(answers)
+        db.query('INSERT INTO role SET ?', {
+            title: answers.newRole,
+            salary: answers.salary,
+            department_id: answers.roleDept
+        })
+    })
+}
+
+const addEmployee = async () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'What is the employees first name?'
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'What is the employees last name?'
+        },
+        {
+            type: 'input',
+            name: 'emRole',
+            message: 'what is the employees role?'
+        }, 
+        {
+            type: 'input',
+            name: 'emMang',
+            message: 'Who is the employees manager?'
+        }
+    ])
+    .then(function (answers){
+        console.log(answers)
+        db.query('INSERT INTO employee SET ?', {
+            first_name: answers.firstName,
+            last_name: answers.lastName,
+            role_id: answers.emRole,
+            manager_id: answers.emMang
+        })
+    })
+}
+
 viewAll()

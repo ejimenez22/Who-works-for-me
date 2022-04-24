@@ -8,9 +8,9 @@ INSERT INTO role (id, title, salary, department_id)
 VALUES
 (1, 'Executive Director', '200000.00', 1),
 (2, 'Lead Developer', '150000.00', 2),
-(3, 'Developer', '120000.00', 3),
-(4, 'Tech Maintenance', '100000.00', 4),
-(5, 'Janitorial Director', '25000.00', 5);
+(3, 'Developer', '120000.00', 2),
+(4, 'Tech Maintenance', '100000.00', 2),
+(5, 'Janitorial Director', '25000.00', 3);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
