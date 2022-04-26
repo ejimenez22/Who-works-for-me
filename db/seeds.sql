@@ -12,11 +12,11 @@ VALUES
 (4, 'Tech Maintenance', '100000.00', 2),
 (5, 'Janitorial Director', '25000.00', 3);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+INSERT INTO employee (id, first_name, last_name, role_id)
 VALUES
-(1, 'Enrique', 'Jimenez', 1, 0),
-(2, 'Chris', 'Humphrey', 2, 1),
-(3, 'Joe', 'Gagliardo', 3, 2),
-(4, 'Tony', 'Sabatino', 3, 2),
-(5, 'Eric', 'Humphrey', 4, 2),
-(6, 'Jared', 'Humphrey', 5, 2);
+(1, 'Enrique', 'Jimenez', 1),
+(2, 'Chris', 'Humphrey', 2),
+(3, 'Joe', 'Gagliardo', 3),
+(4, 'Tony', 'Sabatino', 3),
+(5, 'Eric', 'Humphrey', 4),
+(6, 'Jared', 'Humphrey', 5);

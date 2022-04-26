@@ -169,12 +169,11 @@ const updateEmployee = async () => {
             type: 'list',
             name: 'employeeList',
             message: 'Which employees role do you wish to update?',
-            choices: employees.map(function {(employeeName) => {
+            choices: employees.object.map((employeeName) => {
                 return {
                     name: employeeName.first_name + "" + employeeName.last_name
                 }
-            
-            }})
+            })
 
         }
     ])
