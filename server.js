@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const db = require('./db/connection')
 const cTable = require('console.table')
 const util = require('util');
+const { resolve } = require('path');
 
 // List of actions to view Database
 const viewAll = async () => {
@@ -163,17 +164,24 @@ const addEmployee = async () => {
 }
 
 const updateEmployee = async () => {
-    const employees = db.query('SELECT * FROM employee');
     inquirer.prompt ([
         {
             type: 'list',
             name: 'employeeList',
             message: 'Which employees role do you wish to update?',
-            choices: employees.object.map((employeeName) => {
-                return {
-                    name: employeeName.first_name + "" + employeeName.last_name
-                }
-            })
+            choices: function employeeName() {
+                return new Promise( (resolve, reject) => {
+                    db.query('SELECT * FROM employee', (err, first_name, last_name) => {
+                        if (err) {
+                            reject(err)
+                        }
+                        else {
+                            resolve( first_name, last_name)
+                            console.log(first_name, last_name)
+                        }
+                    })
+                })
+            }
 
         }
     ])
