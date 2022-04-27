@@ -171,13 +171,13 @@ const updateEmployee = async () => {
             message: 'Which employees role do you wish to update?',
             choices: function employeeName() {
                 return new Promise( (resolve, reject) => {
-                    db.query('SELECT * FROM employee', (err, first_name, last_name) => {
+                    db.query('SELECT first_name + "" + last_name as NAME from employee', (err, rows) => {
                         if (err) {
                             reject(err)
                         }
                         else {
-                            resolve( first_name, last_name)
-                            console.log(first_name, last_name)
+                            resolve( rows )
+                            console.log(rows)
                         }
                     })
                 })
