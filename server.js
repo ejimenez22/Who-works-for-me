@@ -38,7 +38,7 @@ const viewAll = async () => {
                 updateEmployee();
                 break;
             case 'Done!':
-                connection.end();
+                db.end();
                 break;
         }
     })
@@ -164,27 +164,49 @@ const addEmployee = async () => {
 }
 
 const updateEmployee = async () => {
-    inquirer.prompt ([
-        {
-            type: 'list',
-            name: 'employeeList',
-            message: 'Which employees role do you wish to update?',
-            choices: function employeeName() {
-                return new Promise( (resolve, reject) => {
-                    db.query('SELECT first_name + "" + last_name as NAME from employee', (err, rows) => {
-                        if (err) {
-                            reject(err)
-                        }
-                        else {
-                            resolve( rows )
-                            console.log(rows)
-                        }
-                    })
-                })
-            }
-
+    db.query('SELECT * FROM employee', (err, rows) => {
+        if (err) {
+            console.log(err)
         }
-    ])
+        else {
+            const choices = rows.map(emName => ({name:emName.first_name, value:emName.id}))
+            
+            inquirer.prompt ([
+                {
+                    type: 'list',
+                    name: 'employeeList',
+                    message: 'Which employees role do you wish to update?',
+                    choices
+                }
+            ])
+            .then(function (choice){
+                updateRole()
+            })
+        }
+    })
+    
 }
 
+const updateRole = async () => {
+    db.query('SELECT * FROM role', (err, rows) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const choices = rows.map(roleTitle => ({title:roleTitle.title, value:roleTitle.title}))
+            inquirer.prompt ([
+                {
+                    type: 'list',
+                    name: 'roleList',
+                    message: 'Please select the employees new role.',
+                    choices
+                }
+            ])
+            .then(function (choice){
+                console.log("The employees role has been updated!")
+                role_id = choice.roleTitle
+                viewAll()
+            })
+        }
+    })
+}
 viewAll()
