@@ -71,7 +71,7 @@ const viewRoles = async () => {
 }
 
 const viewEmployees = async () => {
-    const query = 'SELECT * FROM employee';
+    const query = 'SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, "", manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;';
 
     db.query(query, function (err, res) {
         if (err) throw err;
@@ -98,6 +98,7 @@ const addDept = async () => {
         }, function (err){
             if (err) throw err;
         })
+        viewAll();
     })
 }
 
@@ -126,6 +127,7 @@ const addRole = async () => {
             salary: answers.salary,
             department_id: answers.roleDept
         })
+        viewAll();
     })
 }
 
@@ -161,6 +163,7 @@ const addEmployee = async () => {
             manager_id: answers.emMang
         })
     })
+    viewAll();
 }
 
 const updateEmployee = async () => {
