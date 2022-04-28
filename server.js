@@ -162,8 +162,8 @@ const addEmployee = async () => {
             role_id: answers.emRole,
             manager_id: answers.emMang
         })
+        viewAll();
     })
-    viewAll();
 }
 
 const updateEmployee = async () => {
