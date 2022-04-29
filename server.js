@@ -166,6 +166,8 @@ const addEmployee = async () => {
     })
 }
 
+//function to update employee and role
+
 const updateEmployee = async () => {
     db.query('SELECT * FROM employee', (err, rows) => {
         if (err) {
